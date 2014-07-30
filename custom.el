@@ -5,10 +5,10 @@
 
 ;; For example, oh-my-emacs disables menu-bar-mode by default. If you want it
 ;; back, just put following code here.
-(menu-bar-mode t)
+;; (menu-bar-mode t)
 
 ;;; You email address
-(setq user-mail-address "xiaohanyu1988@gmail.com")
+(setq user-mail-address "yuan.lin@na.nykline.com")
 
 ;;; Calendar settings
 ;; you can use M-x sunrise-sunset to get the sun time
@@ -62,3 +62,77 @@ inversion of gas-comment-region"
           (delete-char 1))
       (next-line))
     (goto-char end)))
+
+;; (set-default-font "Monospace-12")
+;;(custom-set-faces
+ ;; custom-set-faces was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ ;; '(default ((t (:family "Monospace" :foundry "unknown" :slant normal :weight normal :height 120 :width normal)))))
+;; '(default ((t "fontset-standard"))))
+
+;; (add-to-list 'default-frame-alist '(fontset . "fontset-standard"))
+;; (set-face-attribute 'default t :fontset "fontset-standard")
+;;
+
+;; (message system-type)
+;; (message "hi")
+
+(when (eq system-type 'gnu/linux)
+  ;; Default Font Face
+  ;; (set-face-attribute 'default nil :family "DejaVu Sans Mono")
+  ;; (set-face-attribute 'default nil :family "Monospace")
+  ;; (set-face-font 'default "fontset-standard")
+
+  (setq my-fonts
+    '("-*-Monaco-*-*-*-*-*-*-*-*-*-*-iso8859-*"
+      "-*-DejaVu Sans Mono-*-*-*-*-*-*-*-*-*-*-*-*"))
+
+    (create-fontset-from-fontset-spec standard-fontset-spec) ;to make --daemon work
+    (dolist (font (reverse my-fonts))
+      (set-fontset-font "fontset-standard" 'unicode font nil 'prepend))
+
+    (add-to-list 'default-frame-alist '(font . "fontset-standard")))
+
+  ; (set-face-attribute 'default nil :height 120)
+
+  ; ;; (set-fontset-font t 'ascii (font-spec :name "Monaco"))
+  ; ;; (set-fontset-font "fontset-default" 'ascii "Monaco")
+  ; (set-fontset-font "fontset-standard"
+  ;                   'ascii
+  ;                   (font-spec :name "Monaco"))
+  ; (set-fontset-font "fontset-standard"
+  ;                   nil
+  ;                   "Monospace" nil 'append)
+  ; )
+
+;; last t is for NO-ENABLE
+;; (load-theme 'solarized-dark t t)
+(load-theme 'solarized-dark t)
+
+(defun mb/pick-color-theme (frame)
+  (select-frame frame)
+  (if (window-system frame)
+      (progn
+        (disable-theme 'solarized-dark) ; in case it was active
+        (enable-theme 'solarized-dark)
+        (load-theme 'solarized-dark t))
+    (progn
+      (disable-theme 'solarized-dark) ; in case it was active
+      (enable-theme 'solarized-dark)
+      (load-theme 'solarized-dark t))))
+(add-hook 'after-make-frame-functions 'mb/pick-color-theme)
+
+;; For when started with emacs or emacs -nw rather than emacs --daemon
+(if window-system
+    (progn
+      (enable-theme 'solarized-dark)
+      (load-theme 'solarized-dark t))
+  (progn
+    (enable-theme 'solarized-dark)
+    (load-theme 'solarized-dark t)))
+
+(defadvice dired (after dedicate activate)
+  "Make this Dired window dedicated."
+  (set-window-dedicated-p (selected-window) t))
