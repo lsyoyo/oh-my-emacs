@@ -109,29 +109,16 @@ inversion of gas-comment-region"
 
 ;; last t is for NO-ENABLE
 ;; (load-theme 'solarized-dark t t)
-(load-theme 'solarized-dark t)
+(load-theme 'solarized-dark t t)
 
 (defun mb/pick-color-theme (frame)
   (select-frame frame)
-  (if (window-system frame)
-      (progn
-        (disable-theme 'solarized-dark) ; in case it was active
-        (enable-theme 'solarized-dark)
-        (load-theme 'solarized-dark t))
-    (progn
-      (disable-theme 'solarized-dark) ; in case it was active
-      (enable-theme 'solarized-dark)
-      (load-theme 'solarized-dark t))))
+  (load-theme 'solarized-dark t))
+
 (add-hook 'after-make-frame-functions 'mb/pick-color-theme)
 
 ;; For when started with emacs or emacs -nw rather than emacs --daemon
-(if window-system
-    (progn
-      (enable-theme 'solarized-dark)
-      (load-theme 'solarized-dark t))
-  (progn
-    (enable-theme 'solarized-dark)
-    (load-theme 'solarized-dark t)))
+(load-theme 'solarized-dark t)
 
 (defadvice dired (after dedicate activate)
   "Make this Dired window dedicated."
