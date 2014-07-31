@@ -86,8 +86,13 @@ inversion of gas-comment-region"
   ;; (set-face-font 'default "fontset-standard")
 
   (setq my-fonts
-    '("-*-Monaco-*-*-*-*-*-*-*-*-*-*-iso8859-*"
-      "-*-DejaVu Sans Mono-*-*-*-*-*-*-*-*-*-*-*-*"))
+    '(
+      ;; "-*-Monaco-*-*-*-*-*-*-*-*-*-*-iso8859-*"
+      ;; "-*-DejaVu Sans Mono-*-*-*-*-*-*-*-*-*-*-*-*"
+      ;; "-*-Droid Sans Mono-*-*-*-*-*-*-*-*-*-*-*-*"
+      ;; "-*-Monospace-*-*-*-*-*-*-*-*-*-*-*-*"
+      "Monospace-14"
+     ))
 
     (create-fontset-from-fontset-spec standard-fontset-spec) ;to make --daemon work
     (dolist (font (reverse my-fonts))
