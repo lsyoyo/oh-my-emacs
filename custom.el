@@ -98,8 +98,9 @@ inversion of gas-comment-region"
     (dolist (font (reverse my-fonts))
       (set-fontset-font "fontset-standard" 'unicode font nil 'prepend))
 
-    (add-to-list 'default-frame-alist '(font . "fontset-standard")))
-
+    (add-to-list 'default-frame-alist '(font . "fontset-standard"))
+    (add-to-list 'default-frame-alist '(width . 90))
+    )
   ; (set-face-attribute 'default nil :height 120)
 
   ; ;; (set-fontset-font t 'ascii (font-spec :name "Monaco"))
@@ -128,3 +129,12 @@ inversion of gas-comment-region"
 (defadvice dired (after dedicate activate)
   "Make this Dired window dedicated."
   (set-window-dedicated-p (selected-window) t))
+
+(global-auto-revert-mode 1)
+
+;; (setq fci-rule-color "#2aa198")
+;; (setq fci-rule-use-dashes t)
+;; (setq fci-dash-pattern 0.75)
+
+;; (define-globalized-minor-mode global-fci-mode fci-mode (lambda () (fci-mode 1)))
+;;   (global-fci-mode 1)
