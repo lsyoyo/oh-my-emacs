@@ -113,6 +113,40 @@ inversion of gas-comment-region"
   ;                   "Monospace" nil 'append)
   ; )
 
+(when (eq system-type 'darwin)
+  ;; Default Font Face
+  ;; (set-face-attribute 'default nil :family "DejaVu Sans Mono")
+  ;; (set-face-attribute 'default nil :family "Monospace")
+  ;; (set-face-font 'default "fontset-standard")
+
+  (setq my-fonts
+    '(
+      ;; "-*-Monaco-*-*-*-*-*-160-*-*-*-*-iso8859-*"
+      ;; "-*-STHeiti-*-*-*-*-*-160-*-*-*-*-*-*"
+      ;; "-*-DejaVu Sans Mono-*-*-*-*-*-*-*-*-*-*-*-*"
+      ;; "-*-Droid Sans Mono-*-*-*-*-*-*-*-*-*-*-*-*"
+      ;; "-*-Monospace-*-*-*-*-*-*-*-*-*-*-*-*"
+      ;; "Monaco-16"
+      ;; "STHeiti-16"
+     ))
+
+    (create-fontset-from-fontset-spec standard-fontset-spec) ;to make --daemon work
+    ;; (dolist (font (reverse my-fonts))
+    ;;   (set-fontset-font "fontset-standard" 'unicode font nil 'prepend))
+    ;; (set-fontset-font "fontset-standard" 'han "STHeiti-16" nil 'prepend)
+    ;; (set-fontset-font "fontset-standard" 'gb18030' ("STHeiti" . "unicode-bmp"))
+
+    ;; (set-fontset-font "fontset-standard" 'ascii "Monaco-16" nil 'prepend))
+    ;; (set-fontset-font "fontset-standard" nil "Monaco-16" nil 'append)
+    ;; (set-fontset-font "fontset-standard" 'unicode ("STHeiti-16" . "gb18030"))
+    (set-fontset-font "fontset-standard" 'ascii "Monaco-16" nil 'prepend)
+    ;; (set-fontset-font "fontset-standard" 'ascii "Droid Sans Mono-16" nil 'prepend)
+    (set-fontset-font "fontset-standard" 'gb18030 "STHeiti-16" nil 'append)
+
+    (add-to-list 'default-frame-alist '(font . "fontset-standard")))
+    ;; (add-to-list 'default-frame-alist '(font . "Monaco-16")))
+    ;; (add-to-list 'default-frame-alist '(font . "Droid Sans Mono-16")))
+
 ;; last t is for NO-ENABLE
 ;; (load-theme 'solarized-dark t t)
 (load-theme 'solarized-dark t t)
@@ -138,3 +172,5 @@ inversion of gas-comment-region"
 
 ;; (define-globalized-minor-mode global-fci-mode fci-mode (lambda () (fci-mode 1)))
 ;;   (global-fci-mode 1)
+(setq tramp-remote-process-environment ())
+(add-to-list 'tramp-remote-process-environment "LC_ALL=en_US.utf8" 'append)
