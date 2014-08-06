@@ -174,3 +174,8 @@ inversion of gas-comment-region"
 ;;   (global-fci-mode 1)
 (setq tramp-remote-process-environment ())
 (add-to-list 'tramp-remote-process-environment "LC_ALL=en_US.utf8" 'append)
+
+(global-set-key (kbd "<C-S-up>")     'buf-move-up)
+(global-set-key (kbd "<C-S-down>")   'buf-move-down)
+(global-set-key (kbd "<C-S-left>")   'buf-move-left)
+(global-set-key (kbd "<C-S-right>")  'buf-move-right)
