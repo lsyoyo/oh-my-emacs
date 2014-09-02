@@ -179,3 +179,16 @@ inversion of gas-comment-region"
 (global-set-key (kbd "<C-S-down>")   'buf-move-down)
 (global-set-key (kbd "<C-S-left>")   'buf-move-left)
 (global-set-key (kbd "<C-S-right>")  'buf-move-right)
+
+(global-set-key (kbd "C-c C-;")  'comment-or-uncomment-region
+                )
+
+(add-hook 'js-mode-hook
+          (lambda () (setq comment-start "/* "
+                           comment-end " */"
+                           js-indent-level (/ tab-width 2))))
+
+(setq tab-width 4)
+(defvaralias 'c-basic-offset 'tab-width)
+(defvaralias 'cperl-indent-level 'tab-width)
+;; (defvaralias 'js-indent-level (/ 'tab-width 2))
