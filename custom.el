@@ -79,6 +79,7 @@ inversion of gas-comment-region"
 ;; (message system-type)
 ;; (message "hi")
 
+
 (when (eq system-type 'gnu/linux)
   ;; Default Font Face
   ;; (set-face-attribute 'default nil :family "DejaVu Sans Mono")
@@ -91,16 +92,34 @@ inversion of gas-comment-region"
       ;; "-*-DejaVu Sans Mono-*-*-*-*-*-*-*-*-*-*-*-*"
       ;; "-*-Droid Sans Mono-*-*-*-*-*-*-*-*-*-*-*-*"
       ;; "-*-Monospace-*-*-*-*-*-*-*-*-*-*-*-*"
-      "Monospace-14"
-     ))
+      ;; "Monospace-14"
+      ))
 
+  (defun ome-my-set-font-set ()
     (create-fontset-from-fontset-spec standard-fontset-spec) ;to make --daemon work
-    (dolist (font (reverse my-fonts))
-      (set-fontset-font "fontset-standard" 'unicode font nil 'prepend))
-
+    (set-fontset-font "fontset-standard" 'gb18030 "STHeiti-14" nil 'prepend)
+    (set-fontset-font "fontset-standard" 'ascii "Monospace-14" nil 'prepend)
     (add-to-list 'default-frame-alist '(font . "fontset-standard"))
-    (add-to-list 'default-frame-alist '(width . 90))
     )
+
+  ;; (create-fontset-from-fontset-spec standard-fontset-spec) ;to make --daemon work
+  ;; (dolist (font (reverse my-fonts))
+  ;;   (set-fontset-font "fontset-standard" 'unicode font nil 'prepend))
+
+  ;; This is the part I want
+  ;; (set-fontset-font "fontset-standard" 'gb18030 "STHeiti-14" nil 'prepend)
+  ;; (set-fontset-font "fontset-standard" 'ascii "Monospace-14" nil 'prepend)
+
+  ;; (add-to-list 'default-frame-alist '(font . "fontset-standard"))
+  ;; This is the part I want
+  (ome-my-set-font-set)
+
+  ;; (add-to-list 'default-frame-alist '(font . "Monospace-14"))
+
+  ;; (message "%s" system-type)
+  ;; (add-to-list 'default-frame-alist '(width . 90))
+  (add-hook 'before-make-frame-hook 'ome-my-set-font-set)
+  )
   ; (set-face-attribute 'default nil :height 120)
 
   ; ;; (set-fontset-font t 'ascii (font-spec :name "Monaco"))
