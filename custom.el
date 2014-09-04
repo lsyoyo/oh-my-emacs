@@ -97,8 +97,8 @@ inversion of gas-comment-region"
 
   (defun ome-my-set-font-set ()
     (create-fontset-from-fontset-spec standard-fontset-spec) ;to make --daemon work
-    (set-fontset-font "fontset-standard" 'gb18030 "STHeiti-14" nil 'prepend)
-    (set-fontset-font "fontset-standard" 'ascii "Monospace-14" nil 'prepend)
+    (set-fontset-font "fontset-standard" 'gb18030 "STHeiti-13" nil 'prepend)
+    (set-fontset-font "fontset-standard" 'ascii "Monospace-13" nil 'prepend)
     (add-to-list 'default-frame-alist '(font . "fontset-standard"))
     )
 
