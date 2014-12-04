@@ -81,10 +81,17 @@ Emacs session.
   (setq evil-auto-indent t)
   (setq evil-regexp-search t)
   (setq evil-want-C-i-jump t)
-  (add-hook 'text-mode-hook 'turn-on-evil-mode)
-  (add-hook 'prog-mode-hook 'turn-on-evil-mode)
-  (add-hook 'comint-mode-hook 'turn-on-evil-mode)
-  (add-hook 'Info-mode-hook 'turn-off-evil-mode))
+  (mapc
+   (lambda (mode-hook)
+     (add-hook mode-hook 'turn-on-evil-mode))
+   '(text-mode-hook
+     prog-mode-hook
+     comint-mode-hook
+     conf-mode-hook))
+  (mapc
+   (lambda (mode-hook)
+     (add-hook mode-hook 'turn-off-evil-mode))
+   '(Info-mode-hook)))
 
 (ome-install 'evil)
 #+END_SRC
@@ -122,17 +129,21 @@ editing your document at your fingertips.
       "e" 'find-file
       "b" 'switch-to-buffer))
   (eval-after-load "helm"
-    (evil-leader/set-key
-      "f" 'helm-for-files
-      "l" 'helm-locate
-      "c" 'helm-colors
-      "y" 'helm-show-kill-ring
-      "t" 'helm-top
-      "m" 'helm-man-woman
-      "o" 'helm-occur
-      "j" 'helm-M-x
-      "e" 'helm-find-files
-      "b" 'helm-buffers-list))
+    (progn
+      (require 'helm-projectile)
+      (evil-leader/set-key
+        "f" 'helm-for-files
+        "l" 'helm-locate
+        "c" 'helm-colors
+        "y" 'helm-show-kill-ring
+        "t" 'helm-top
+        "m" 'helm-man-woman
+        "o" 'helm-occur
+        "j" 'helm-M-x
+        "e" 'helm-find-files
+        "b" 'helm-buffers-list
+        "h" 'helm-projectile-find-file
+        "H" 'helm-projectile)))
   (eval-after-load "expand-region"
     (progn
       (setq expand-region-contract-fast-key "z")
@@ -145,7 +156,8 @@ editing your document at your fingertips.
       "n" 'git-gutter:next-hunk
       "p" 'git-gutter:previous-hunk))
   (evil-leader/set-key
-    "k" 'kill-buffer)
+    "k" 'kill-buffer
+    "d" 'dired)
   (global-evil-leader-mode))
 
 (ome-install 'evil-leader)
