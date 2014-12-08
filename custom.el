@@ -98,7 +98,8 @@ inversion of gas-comment-region"
   (defun ome-my-set-font-set ()
     (create-fontset-from-fontset-spec standard-fontset-spec) ;to make --daemon work
     (set-fontset-font "fontset-standard" 'gb18030 "STHeiti-13" nil 'prepend)
-    (set-fontset-font "fontset-standard" 'ascii "Monospace-13" nil 'prepend)
+    ;; (set-fontset-font "fontset-standard" 'ascii "Monospace-13" nil 'prepend)
+    (set-fontset-font "fontset-standard" 'ascii "Monaco-13" nil 'prepend)
     (add-to-list 'default-frame-alist '(font . "fontset-standard"))
     )
 
@@ -179,11 +180,11 @@ inversion of gas-comment-region"
 ;; For when started with emacs or emacs -nw rather than emacs --daemon
 (load-theme 'solarized-dark t)
 
-(defadvice dired (after dedicate activate)
-  "Make this Dired window dedicated."
-  (set-window-dedicated-p (selected-window) t))
+;; (defadvice dired (after dedicate activate)
+;;   "Make this Dired window dedicated."
+;;   (set-window-dedicated-p (selected-window) t))
 
-(global-auto-revert-mode 1)
+;; (global-auto-revert-mode 1)
 
 ;; (setq fci-rule-color "#2aa198")
 ;; (setq fci-rule-use-dashes t)
